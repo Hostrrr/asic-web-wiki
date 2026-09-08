@@ -261,4 +261,34 @@ window.ASIC_SEARCH_INDEX = [
       observer.observe(el);
     });
   }
+  /* ----- Carousel arrows ----- */
+  const carousel = document.querySelector("[data-carousel]");
+  const prevBtn = document.querySelector("[data-carousel-prev]");
+  const nextBtn = document.querySelector("[data-carousel-next]");
+
+  if (carousel && prevBtn && nextBtn) {
+    function scrollAmount() {
+      const card = carousel.querySelector(".card--carousel");
+      if (!card) return 280;
+      const styles = window.getComputedStyle(carousel);
+      const gap = parseFloat(styles.columnGap || styles.gap) || 16;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    function updateButtons() {
+      const max = carousel.scrollWidth - carousel.clientWidth;
+      prevBtn.disabled = carousel.scrollLeft <= 2;
+      nextBtn.disabled = carousel.scrollLeft >= max - 2;
+    }
+
+    prevBtn.addEventListener("click", function () {
+      carousel.scrollBy({ left: -scrollAmount(), behavior: "smooth" });
+    });
+    nextBtn.addEventListener("click", function () {
+      carousel.scrollBy({ left: scrollAmount(), behavior: "smooth" });
+    });
+    carousel.addEventListener("scroll", updateButtons, { passive: true });
+    window.addEventListener("resize", updateButtons);
+    updateButtons();
+  }
 })();
