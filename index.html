@@ -29,9 +29,12 @@
     <section class="home-carousel" aria-label="Разделы">
       <div class="section-head">
         <h2 class="section-title">Разделы</h2>
-        <p class="section-hint">Листайте вправо →</p>
+        <div class="carousel-nav">
+          <button type="button" class="carousel-btn" data-carousel-prev aria-label="Назад">‹</button>
+          <button type="button" class="carousel-btn" data-carousel-next aria-label="Вперёд">›</button>
+        </div>
       </div>
-      <div class="carousel" tabindex="0">
+      <div class="carousel" data-carousel>
         <a class="card card--carousel featured" href="articles/start.html">
           <div class="card__thumb" aria-hidden="true"></div>
           <div class="card__body">
